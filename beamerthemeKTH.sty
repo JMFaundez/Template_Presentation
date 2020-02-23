@@ -1,13 +1,21 @@
 \ProvidesPackage{beamerthemeKTH}[2016/06/21]
 \mode<presentation>
-
 \RequirePackage{tikz}
+\RequirePackage{amssymb}
+\RequirePackage{fontawesome}
+
+% Define KTH Colors
 \definecolor{kthcolor}{RGB}{25,84,166}
+\definecolor{kthcolor_light}{RGB}{36,160,216}
+\definecolor{kthcolor_pink}{RGB}{216,84,151}
+\definecolor{kthcolor_green}{RGB}{176,201,43}
+\definecolor{kthcolor_gray}{RGB}{101,101,108}
+
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamersize{text margin left=4mm,text margin right=4mm}
 
-\pgfdeclareimage[height=12mm]{kthlogo}{kthgraphics/KTH-logo}
+\pgfdeclareimage[height=15mm]{kthlogo}{kthgraphics/KTH-logo}
 
 \newcommand{\kthlines}{%
 \begin{tikzpicture}[line width=0.5pt,rounded corners=2pt,color=kthcolor,x=2mm,y=2mm]
@@ -29,16 +37,78 @@
   \draw (0,0) -- (77,0);
 \end{tikzpicture}}
 
-
+%%%% TITLE PAGE BACKGROUND
 \newcommand{\startpage}{%
 \usebackgroundtemplate{\vbox{\null\vspace{4mm}
   \hspace{4mm}\pgfuseimage{kthlogo}\par
-  \vspace{50mm}\hbox{\hspace{3mm}\kthlines}%
-  \vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}}}}
+  \vspace{45mm}\hbox{\hspace{3mm}\kthlines}%
+  \vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}
+        }
+    }
+}
 
+%%% NORMAL PAGE BACKGROUND
 \newcommand{\normalpage}{%
 \usebackgroundtemplate{\vbox{\null
-  \vspace{\paperheight}\vspace{-3mm}\hbox{\hspace{3mm}\kthsingleline}}}}
+  \vspace{\paperheight}\vspace{-6mm}\hbox{\hspace{3mm}\kthsingleline}
+   \vspace{1mm}
+   \hbox{
+   \begin{tabular}{p{0.3\paperwidth}p{0.3\paperwidth} p{0.3\paperwidth}}
+   \small{\textcolor{kthcolor_gray}{\inserttitle }} &  
+   \centering{\small{\textcolor{kthcolor_gray}{\insertinstitute }}} &
+   \hfill\small{\textcolor{kthcolor_gray}{\insertframenumber/\inserttotalframenumber}}
+  
+   \end{tabular}
+            }
+        }
+    }
+}
+
+
+%%%%%%%%%%%% SOME FORMAT
+
+\setbeamercolor{title}{fg=kthcolor_gray}
+\setbeamerfont{title}{series=\bfseries}
+
+\setbeamercolor{frametitle}{fg=kthcolor}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+\setbeamercolor{framesubtitle}{fg=kthcolor_light}
+\setbeamerfont{framesubitle}{size=\normalfont}
+
+
+\setbeamercolor{block title}{bg=kthcolor_light,fg=white}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block body}{bg=kthcolor_light!40,fg=kthcolor_gray}
+
+\setbeamercolor{block title alerted}{bg=kthcolor_pink,fg=white}
+\setbeamerfont{block title alerted}{series=\bfseries}
+\setbeamercolor{block body alerted}{bg=kthcolor_pink!40,fg=kthcolor_gray}
+  
+\setbeamercolor{block title example}{bg=kthcolor_green,fg=white}
+\setbeamerfont{block title example}{series=\bfseries}
+\setbeamercolor{block body example}{bg=kthcolor_green!40,fg=kthcolor_gray}
+
+%%%%%% ITEM FORMAT
+\setbeamertemplate{itemize item}{\color{kthcolor_light}\faCube}
+\setbeamertemplate{itemize subitem}{\color{kthcolor_pink}\faChevronRight}
+
+\setbeamertemplate{enumerate item}{\color{kthcolor_light}\Roman{enumi}}
+\setbeamertemplate{enumerate subitem}{\color{kthcolor_pink}\roman{enumii}}
+%%%% TITLE PAGE  
+  \defbeamertemplate*{title page}{customized}[1][]
+{
+  \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+  \usebeamerfont{subtitle}\insertsubtitle\par
+  \bigskip
+  \usebeamerfont{author}\insertauthor\par
+  \usebeamerfont{institute}\insertinstitute\par
+  \usebeamerfont{date}\insertdate\par
+ 
+}
+
+%%%%%%%%%%%% Setting path to Figures
+\graphicspath{{figures/}}
 
 
 % move title to center
