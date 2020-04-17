@@ -3,6 +3,7 @@
 \RequirePackage{tikz}
 \RequirePackage{amssymb}
 \RequirePackage{fontawesome}
+\usepackage[percent]{overpic}
 
 % Define KTH Colors
 \definecolor{kthcolor}{RGB}{25,84,166}
@@ -13,9 +14,11 @@
 
 
 \setbeamertemplate{navigation symbols}{}
-\setbeamersize{text margin left=4mm,text margin right=4mm}
+\setbeamersize{text margin left=10mm,text margin right=10mm}
 
-\pgfdeclareimage[height=15mm]{kthlogo}{kthgraphics/KTH-logo}
+\pgfdeclareimage[height=20mm]{kthlogo}{kthgraphics/KTH-logo}
+\pgfdeclareimage[height=13mm]{kthlogo_small}{kthgraphics/KTH-logo}
+%\pgfdeclareimage[width=\paperwidth, angle=90]{flow_bottom_title}{kthgraphics/bottom_title.pdf}
 
 \newcommand{\kthlines}{%
 \begin{tikzpicture}[line width=0.5pt,rounded corners=2pt,color=kthcolor,x=2mm,y=2mm]
@@ -39,27 +42,38 @@
 
 %%%% TITLE PAGE BACKGROUND
 \newcommand{\startpage}{%
-\usebackgroundtemplate{\vbox{\null\vspace{4mm}
-  \hspace{4mm}\pgfuseimage{kthlogo}\par
-  \vspace{45mm}\hbox{\hspace{3mm}\kthlines}%
-  \vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}
-        }
+\usebackgroundtemplate{\vbox{\null
+\vspace{9mm}
+  \parbox[c]{\paperwidth}{\centering\includegraphics[width=0.4\textwidth]{kthgraphics/flow_name.png}}\par
+  %\vspace{45mm}\hbox{\hspace{3mm}\kthlines}%
+  %\vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}
+  \vspace{46.5mm}\parbox[c]{\paperwidth}{\centering\pgfuseimage{kthlogo}}
+  \vspace{0mm}
+  \includegraphics[width=\paperwidth,angle=180]{kthgraphics/bottom_title.pdf}
+}
     }
 }
 
 %%% NORMAL PAGE BACKGROUND
 \newcommand{\normalpage}{%
 \usebackgroundtemplate{\vbox{\null
-  \vspace{\paperheight}\vspace{-6mm}\hbox{\hspace{3mm}\kthsingleline}
+    \vspace{4mm}
+  \hspace{3mm}\pgfuseimage{kthlogo_small}\par
+  \vspace{\paperheight}\vspace{-29.5mm}
+  \hspace{3mm}\includegraphics[width=0.1\textwidth]{kthgraphics/flow_small.png}\par
+  \vspace{1mm}
+  \begin{overpic}[width=\paperwidth]{kthgraphics/bottom2.png}
+  %\vspace{\paperheight}\vspace{-6mm}\hbox{\hspace{3mm}\kthsingleline}
    \vspace{1mm}
    \hbox{
    \begin{tabular}{p{0.3\paperwidth}p{0.3\paperwidth} p{0.3\paperwidth}}
-   \small{\textcolor{kthcolor_gray}{\inserttitle }} &  
-   \centering{\small{\textcolor{kthcolor_gray}{\insertinstitute }}} &
-   \hfill\small{\textcolor{kthcolor_gray}{\insertframenumber/\inserttotalframenumber}}
+   \small{\textcolor{white}{\inserttitle }} &  
+   \centering{\small{\textcolor{white}{\insertinstitute }}} &
+   \hfill\small{\textcolor{white}{\insertframenumber/\inserttotalframenumber}}
   
    \end{tabular}
             }
+            \end{overpic}
         }
     }
 }
@@ -70,11 +84,15 @@
 \setbeamercolor{title}{fg=kthcolor_gray}
 \setbeamerfont{title}{series=\bfseries}
 
-\setbeamercolor{frametitle}{fg=kthcolor}
-\setbeamerfont{frametitle}{series=\bfseries}
-
 \setbeamercolor{framesubtitle}{fg=kthcolor_light}
-\setbeamerfont{framesubitle}{size=\normalfont}
+\setbeamerfont{framesubtitle}{size=\small}
+
+\setbeamercolor{frametitle}{fg=kthcolor_gray}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{\vspace{4mm}\hspace{15mm}\insertframetitle\par
+    \hspace{15mm}\usebeamerfont{framesubtitle}\insertframesubtitle
+    
+}
 
 
 \setbeamercolor{block title}{bg=kthcolor_light,fg=white}
@@ -97,15 +115,25 @@
 \setbeamertemplate{enumerate subitem}{\color{kthcolor_pink}\roman{enumii}}
 %%%% TITLE PAGE  
   \defbeamertemplate*{title page}{customized}[1][]
-{
+{\begin{center}
   \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
   \usebeamerfont{subtitle}\insertsubtitle\par
   \bigskip
   \usebeamerfont{author}\insertauthor\par
   \usebeamerfont{institute}\insertinstitute\par
   \usebeamerfont{date}\insertdate\par
- 
+ \end{center}
 }
+
+
+%%%%%%%%%%%%%%% Table of contents
+
+\setbeamertemplate{section in toc}[square]
+\setbeamerfont{section number projected}{size=\large}
+\setbeamercolor{section number projected}{bg=kthcolor,fg=white}
+\setbeamercolor{section in toc}{fg=black}
+\setbeamerfont{section in toc}{size=\large}
+
 
 %%%%%%%%%%%% Setting path to Figures
 \graphicspath{{figures/}}
