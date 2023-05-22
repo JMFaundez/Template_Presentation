@@ -12,6 +12,11 @@
 \definecolor{kthcolor_green}{RGB}{176,201,43}
 \definecolor{kthcolor_gray}{RGB}{101,101,108}
 
+% Define Matlab colors
+\definecolor{matlabcolor1}{rgb}{0, 0.4470, 0.7410} 
+\definecolor{matlabcolor2}{rgb}{0.8500, 0.3250, 0.0980}
+\definecolor{matlabcolor3}{rgb}{0.9290, 0.6940, 0.1250}
+\definecolor{matlabcolor4}{rgb}{0.4940, 0.1840, 0.5560}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamersize{text margin left=10mm,text margin right=10mm}
@@ -43,13 +48,14 @@
 %%%% TITLE PAGE BACKGROUND
 \newcommand{\startpage}{%
 \usebackgroundtemplate{\vbox{\null
-\vspace{9mm}
+ \vspace{3mm}\hspace{3mm}\pgfuseimage{kthlogo}\par
+\vspace{-12mm}
   \parbox[c]{\paperwidth}{\centering\includegraphics[width=0.4\textwidth]{kthgraphics/flow_name.png}}\par
-  %\vspace{45mm}\hbox{\hspace{3mm}\kthlines}%
-  %\vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}
-  \vspace{46.5mm}\parbox[c]{\paperwidth}{\centering\pgfuseimage{kthlogo}}
-  \vspace{0mm}
-  \includegraphics[width=\paperwidth,angle=180]{kthgraphics/bottom_title.pdf}
+  \vspace{38mm}\hbox{\hspace{3mm}\kthlines}%
+  \vspace{5mm}\hbox{\hspace{3mm}\kthsingleline}
+  %\vspace{46.5mm}\parbox[c]{\paperwidth}{\centering\pgfuseimage{kthlogo}}
+  %\vspace{0mm}
+  %\includegraphics[width=\paperwidth,angle=180]{kthgraphics/bottom_title.pdf}
 }
     }
 }
@@ -57,12 +63,12 @@
 %%% NORMAL PAGE BACKGROUND
 \newcommand{\normalpage}{%
 \usebackgroundtemplate{\vbox{\null
-    \vspace{4mm}
+    \vspace{3mm}
   \hspace{3mm}\pgfuseimage{kthlogo_small}\par
-  \vspace{\paperheight}\vspace{-29.5mm}
-  \hspace{3mm}\includegraphics[width=0.1\textwidth]{kthgraphics/flow_small.png}\par
+  \vspace{\paperheight}\vspace{-28.5mm}
+  \hspace{3mm}\includegraphics[width=0.1\textwidth]{kthgraphics/flow_name.png}\par
   \vspace{1mm}
-  \begin{overpic}[width=\paperwidth]{kthgraphics/bottom2.png}
+  \begin{overpic}[width=\paperwidth, angle=180]{kthgraphics/bottom_title.pdf}
   %\vspace{\paperheight}\vspace{-6mm}\hbox{\hspace{3mm}\kthsingleline}
    \vspace{1mm}
    \hbox{
@@ -76,6 +82,12 @@
             \end{overpic}
         }
     }
+}
+
+%%% White PAGE BACKGROUND
+\newcommand{\whitepage}{%
+\usebackgroundtemplate{
+}
 }
 
 
@@ -93,7 +105,8 @@
     \hspace{15mm}\usebeamerfont{framesubtitle}\insertframesubtitle
     
 }
-
+\setbeamercolor{alerted text}{fg=kthcolor_pink}
+\setbeamercolor{structure}{fg=kthcolor_light}
 
 \setbeamercolor{block title}{bg=kthcolor_light,fg=white}
 \setbeamerfont{block title}{series=\bfseries}
@@ -113,6 +126,7 @@
 
 \setbeamertemplate{enumerate item}{\color{kthcolor_light}\Roman{enumi}}
 \setbeamertemplate{enumerate subitem}{\color{kthcolor_pink}\roman{enumii}}
+
 %%%% TITLE PAGE  
   \defbeamertemplate*{title page}{customized}[1][]
 {\begin{center}
@@ -137,6 +151,19 @@
 
 %%%%%%%%%%%% Setting path to Figures
 \graphicspath{{figures/}}
+
+
+%%%%%%%%%%% Footnote position
+\setbeamercolor{footnote}{fg=kthcolor_gray}
+\renewcommand\footnoterule{\rule{\linewidth}{0pt}}
+\setbeamertemplate{footnote}{
+        \parindent 0em\noindent%
+        \raggedleft
+        %\raggedright
+            \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+        \vspace{0.6cm}
+        }
+
 
 
 % move title to center
